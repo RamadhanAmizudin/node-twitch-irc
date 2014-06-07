@@ -2,7 +2,17 @@
 
 Node.js module allowing you to connect to Twitch and handle multiple events asynchronously.
 
-## Copyright and license
+### Installation
+
+1- Install [Node.js](http://nodejs.org/download/)
+
+2- Install node-twitch-irc via NPM:
+```
+npm install node-twitch-irc
+```
+3- Check the [examples](examples) of how to use node-twitch-irc.
+
+### Copyright and license
 
 The MIT License (MIT)
 
