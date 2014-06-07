@@ -18,7 +18,6 @@ var config = {
 
 var client = new irc.connect(config, function(err, event) {
 	if (!err) {
-		
 		// "Action" event.
 		event.on("action", function (from, to, message) {
 			console.log('[[ACTION]'+to+']] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
