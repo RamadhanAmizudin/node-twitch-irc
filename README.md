@@ -10,7 +10,11 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 ```
 npm install node-twitch-irc
 ```
-3- Check the [examples](examples) of how to use node-twitch-irc.
+3- Check out the [examples on GitHub](examples) of how to use node-twitch-irc.
+
+### Questions or need help?
+
+Contact me on Twitter [@Schmoopiie](https://twitter.com/Schmoopiie/) or [create an issue on GitHub](https://github.com/Schmoopiie/node-twitch-irc/issues).
 
 ### Copyright and license
 
