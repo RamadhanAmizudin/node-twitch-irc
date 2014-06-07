@@ -1,4 +1,6 @@
 /**
+ * This is an example of how to use node-twitch-irc.
+ * 
  * You will need to create an account for your bot and retrieve the
  * oauth password (http://twitchapps.com/tmi/).
  */
