@@ -12,6 +12,24 @@ npm install node-twitch-irc
 ```
 3- Check out the [examples on GitHub](examples) of how to use node-twitch-irc.
 
+### Events available
+
+- [action](examples/events.js#L21)
+- [chat](examples/events.js#L26)
+- [clearchat](examples/events.js#L31)
+- [connected](examples/events.js#L36)
+- [disconnected](examples/events.js#L41)
+- [join](examples/events.js#L46)
+- [mode](examples/events.js#L51)
+- [names](examples/events.js#L56)
+- [raw](examples/events.js#L67)
+- [subscribe](examples/events.js#L72)
+- [timeout](examples/events.js#L77)
+
+### Commands available
+
+Still working on it ;-)
+
 ### Questions or need help?
 
 Contact me on Twitter [@Schmoopiie](https://twitter.com/Schmoopiie/) or [create an issue on GitHub](https://github.com/Schmoopiie/node-twitch-irc/issues).
