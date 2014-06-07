@@ -18,9 +18,20 @@ var config = {
 
 var client = new irc.connect(config, function(err, event) {
 	if (!err) {
-		// "Raw" event.
-		event.on("raw", function (msg) {
-			console.log('RAW: '+msg);
+		
+		// "Action" event.
+		event.on("action", function (from, to, message) {
+			console.log('[[ACTION]'+to+']] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
+		});
+		
+		// "Chat" event.
+		event.on("chat", function (from, to, message) {
+			console.log('['+to+'] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
+		});
+		
+		// "Clearchat" event.
+		event.on("clearchat", function (channel) {
+			console.log('['+channel+'] CHAT CLEARED.');
 		});
 		
 		// "Connected" event.
@@ -38,19 +49,25 @@ var client = new irc.connect(config, function(err, event) {
 			console.log('JOINED: '+channel);
 		});
 		
-		// "Chat" event.
-		event.on("chat", function (from, to, message) {
-			console.log('['+to+'] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
-		});
-		
-		// "Action" event.
-		event.on("action", function (from, to, message) {
-			console.log('[[ACTION]'+to+']] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
-		});
-		
 		// "Mode" event.
 		event.on("mode", function (channel, mode, username) {
 			console.log('MODE: '+channel+' '+mode+' '+username);
+		});
+		
+		// "Names" event. ('names' option must be set to true!)
+		/**
+		 * When the bot joins a channel, it will retrieve all the active moderators,
+		 * staffs, admins and viewers as an object.
+		 * 
+		 * The event will NOT be fired if the Twitch API is not responding.
+		 */
+		event.on("names", function (channel, names) {
+			//console.log(names);
+		});
+		
+		// "Raw" event.
+		event.on("raw", function (msg) {
+			console.log('RAW: '+msg);
 		});
 		
 		// "Subscribe" event.
@@ -61,21 +78,6 @@ var client = new irc.connect(config, function(err, event) {
 		// "Timeout" event.
 		event.on("timeout", function (channel, username) {
 			console.log(username+' has been timed out on '+channel+'.');
-		});
-		
-		// "Clearchat" event.
-		event.on("clearchat", function (channel) {
-			console.log('['+channel+'] CHAT CLEARED.');
-		});
-		
-		// "Names" event. ('names' option must be set to true!)
-		
-		// When the bot joins a channel, it will retrieve all the active moderators,
-		// staffs, admins and viewers as an object.
-		
-		// The event will NOT be fired if the Twitch API is not responding.
-		event.on("names", function (channel, names) {
-			//console.log(names);
 		});
 	}
 	else  {
