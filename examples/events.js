@@ -72,6 +72,8 @@ var client = new irc.connect(config, function(err, event) {
 		
 		// When the bot joins a channel, it will retrieve all the active moderators,
 		// staffs, admins and viewers as an object.
+		
+		// The event will NOT be fired if the Twitch API is not responding.
 		event.on("names", function (channel, names) {
 			//console.log(names);
 		});
