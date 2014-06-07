@@ -248,9 +248,10 @@ function _handleMsg(line) {
  */
 function _chatters(channel, cb) {
 	rq('http://tmi.twitch.tv/group/user/'+channel.replace('#','').toLowerCase()+'/chatters', function (error, response, body) {
-		if (!error && response.statusCode === 200 && body !== '\"\"') {
+		var codes = [500,501,502,503,504,505];
+		if (!error && response.statusCode === 200 && us.indexOf(codes, response.statusCode) === -1) {
 			cb(null, JSON.parse(body));
-		} else { cb(error, null); }
+		} else { cb(response.statusCode, null); }
 	});
 }
 
