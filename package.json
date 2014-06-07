@@ -2,7 +2,7 @@
   "name": "node-twitch-irc",
   "version": "0.1.0",
   "description": "node-twitch-irc",
-  "main": "twitch.js",
+  "main": "twitch-irc.js",
   "scripts": {
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
   },
