@@ -236,6 +236,11 @@ function _handleMsg(line) {
 			
 			connect.emit('join', channel);
 			break;
+		case 'PART':
+			var channel = line.split(" ")[2];
+			
+			connect.emit('part', channel);
+			break;
 	}
 	
 	return line;
@@ -258,10 +263,9 @@ function _chatters(channel, cb) {
 /**
  * Commands..
  */
-connect.prototype.say = function(channel, message) {
+connect.prototype.action = function(channel, message) {
 	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
-	
-	connect.write('PRIVMSG '+channel.toLowerCase()+' :'+message+'\r\n');
+	connect.write('PRIVMSG '+channel.toLowerCase()+' :/me '+message+'\r\n');
 }
 
 connect.prototype.join = function(channel) {
@@ -274,6 +278,12 @@ connect.prototype.part = function(channel) {
 	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
 	
 	connect.write('PART '+channel.toLowerCase()+'\r\n');
+}
+
+connect.prototype.say = function(channel, message) {
+	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
+	
+	connect.write('PRIVMSG '+channel.toLowerCase()+' :'+message+'\r\n');
 }
 
 exports.connect = connect;

@@ -48,6 +48,11 @@ var client = new irc.connect(config, function(err, event) {
 			console.log('JOINED: '+channel);
 		});
 		
+		// "Part" event.
+		event.on("part", function (channel) {
+			console.log('LEFT: '+channel);
+		});
+		
 		// "Mode" event.
 		event.on("mode", function (channel, mode, username) {
 			console.log('MODE: '+channel+' '+mode+' '+username);
