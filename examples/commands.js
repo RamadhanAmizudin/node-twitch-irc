@@ -18,6 +18,15 @@ var config = {
 	oauth: 'oauth:your_oauth_password'
 };
 
+/**
+ * Adding startsWith function. Useful when using commands.
+ */
+if (typeof String.prototype.startsWith !== 'function') {
+	String.prototype.startsWith = function (str){
+		return this.indexOf(str) === 0;
+	};
+}
+
 var client = new irc.connect(config, function(err, event) {
 	if (!err) {
 		// "Chat" event.

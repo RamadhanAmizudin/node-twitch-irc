@@ -32,9 +32,9 @@ npm install node-twitch-irc
 
 ### Commands
 
-- [join](examples/commands.js#L33)
-- [part](examples/commands.js#L47)
-- [say](examples/commands.js#L27)
+- [join](examples/commands.js#L42)
+- [part](examples/commands.js#L56)
+- [say](examples/commands.js#L36)
 
 ### Questions or need help?
 
