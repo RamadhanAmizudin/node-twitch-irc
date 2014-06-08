@@ -1,11 +1,6 @@
 /**
  * This is an example of how to use node-twitch-irc.
  * 
- * In this example, the bot will listen for the commands:
- *  - !hello
- *  - !join #channel
- *  - !part #channel
- * 
  * You will need to create an account for your bot and retrieve the
  * oauth password (http://twitchapps.com/tmi/).
  */
@@ -18,69 +13,36 @@ var config = {
 	oauth: 'oauth:your_oauth_password'
 };
 
-/**
- * Adding startsWith function. Useful when using commands.
- */
-if (typeof String.prototype.startsWith !== 'function') {
-	String.prototype.startsWith = function (str){
-		return this.indexOf(str) === 0;
-	};
-}
-
 var client = new irc.connect(config, function(err, event) {
 	if (!err) {
 		// "Chat" event.
 		event.on("chat", function (from, to, message) {
-			console.log('['+to+'] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
+			var msg = message.toLowerCase();
+			var args = msg.split(" ");
 			
-			// Command: !hello
-			if (message === '!hello') {
-				// Greets the user on the channel.
+			if (msg === '!hello') {
 				client.say(to, 'Hello, '+from.username+'!');
 			}
 			
-			// Command: !join #channel
-			else if (message.startsWith('!join ')) {
-				// Get the channel name..
-				var channel = message.split(" ")[1];
-				
-				// Make sure the user specified a channel to join..
-				if (typeof channel !== 'undefined' && channel.trim() !== '') {
-					client.join(channel);
-					client.say(to, 'Joined '+channel);
+			else if (msg === '!action') {
+				client.action(to, 'Hello, '+from.username+'!');
+			}
+			
+			else if (msg.indexOf('!join ') === 0) {
+				if (typeof args[1] !== 'undefined' && args[1].trim() !== '') {
+					client.join(args[1]);
 				} else {
 					client.say(to, 'Insufficient arguments. Type !join #channel');
 				}
 			}
 			
-			// Command: !part #channel
-			else if (message.startsWith('!part ')) {
-				// Get the channel name..
-				var channel = message.split(" ")[1];
-				
-				// Make sure the user specified a channel to join..
-				if (typeof channel !== 'undefined' && channel.trim() !== '') {
-					client.part(channel);
-					client.say(to, 'Left '+channel);
+			else if (msg.indexOf('!part ') === 0) {
+				if (typeof args[1] !== 'undefined' && args[1].trim() !== '') {
+					client.part(args[1]);
 				} else {
 					client.say(to, 'Insufficient arguments. Type !part #channel');
 				}
 			}
-		});
-		
-		// "Connected" event.
-		event.on("connected", function () {
-			console.log('CONNECTED');
-		});
-		
-		// "Disconnected" event.
-		event.on("disconnected", function (reason) {
-			console.log('DISCONNECTED: '+reason);
-		});
-		
-		// "Join" event.
-		event.on("join", function (channel) {
-			console.log('JOINED: '+channel);
 		});
 	}
 	else  {
