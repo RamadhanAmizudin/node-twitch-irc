@@ -13,7 +13,7 @@ if (typeof String.prototype.startsWith !== 'function') {
 /**
  * Main function.
  */
-function connect(conf, callback) {
+var connect = function(conf, callback) {
 	var self = this;
 	var err = {
 		code: 0,
@@ -253,6 +253,27 @@ function _chatters(channel, cb) {
 			cb(null, JSON.parse(body));
 		} else { cb(response.statusCode, null); }
 	});
+}
+
+/**
+ * Commands..
+ */
+connect.prototype.say = function(channel, message) {
+	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
+	
+	connect.write('PRIVMSG '+channel.toLowerCase()+' :'+message+'\r\n');
+}
+
+connect.prototype.join = function(channel) {
+	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
+	
+	connect.write('JOIN '+channel.toLowerCase()+'\r\n');
+}
+
+connect.prototype.part = function(channel) {
+	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
+	
+	connect.write('PART '+channel.toLowerCase()+'\r\n');
 }
 
 exports.connect = connect;
