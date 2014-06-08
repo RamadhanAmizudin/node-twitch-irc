@@ -48,11 +48,6 @@ var client = new irc.connect(config, function(err, event) {
 			console.log('JOINED: '+channel);
 		});
 		
-		// "Part" event.
-		event.on("part", function (channel) {
-			console.log('LEFT: '+channel);
-		});
-		
 		// "Mode" event.
 		event.on("mode", function (channel, mode, username) {
 			console.log('MODE: '+channel+' '+mode+' '+username);
@@ -67,6 +62,11 @@ var client = new irc.connect(config, function(err, event) {
 		 */
 		event.on("names", function (channel, names) {
 			//console.log(names);
+		});
+		
+		// "Part" event.
+		event.on("part", function (channel) {
+			console.log('LEFT: '+channel);
 		});
 		
 		// "Raw" event.
