@@ -2,6 +2,10 @@
 
 Node.js module allowing you to connect to Twitch and handle multiple events asynchronously.
 
+![](https://nodei.co/npm/node-twitch-irc.png?downloads=true&stars=true)
+
+![](https://david-dm.org/Schmoopiie/node-twitch-irc.png)
+
 ### Installation
 
 1- Install [Node.js](http://nodejs.org/download/)
