@@ -37,9 +37,6 @@ var client = new irc.connect(config, function(err, event) {
 				
 				// Make sure the user specified a channel to join..
 				if (typeof channel !== 'undefined' && channel.trim() !== '') {
-					// Check if the channel starts with #
-					if (channel.charAt(0) !== '#') { channel = '#'+channel; }
-					// Join the channel and tell the user that we have joined the channel.
 					client.join(channel);
 					client.say(to, 'Joined '+channel);
 				} else {
@@ -54,9 +51,6 @@ var client = new irc.connect(config, function(err, event) {
 				
 				// Make sure the user specified a channel to join..
 				if (typeof channel !== 'undefined' && channel.trim() !== '') {
-					// Check if the channel starts with #
-					if (channel.charAt(0) !== '#') { channel = '#'+channel; }
-					// Leave the channel and tell the user that we have left the channel.
 					client.part(channel);
 					client.say(to, 'Left '+channel);
 				} else {
