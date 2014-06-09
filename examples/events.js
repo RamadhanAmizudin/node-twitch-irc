@@ -19,13 +19,13 @@ var config = {
 var client = new irc.connect(config, function(err, event) {
 	if (!err) {
 		// "Action" event.
-		event.on("action", function (from, to, message) {
-			console.log('[[ACTION]'+to+']] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
+		event.on("action", function (user, channel, message) {
+			console.log('[[ACTION]'+channel+']] <'+user.color+'|'+user.username+'|'+user.special+'> '+message);
 		});
 		
 		// "Chat" event.
-		event.on("chat", function (from, to, message) {
-			console.log('['+to+'] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
+		event.on("chat", function (user, channel, message) {
+			console.log('['+channel+'] <'+user.color+'|'+user.username+'|'+user.special+'> '+message);
 		});
 		
 		// "Clearchat" event.
@@ -70,8 +70,23 @@ var client = new irc.connect(config, function(err, event) {
 		});
 		
 		// "Raw" event.
+		event.on("r9kmode", function (channel, value) {
+			console.log('Changed R9K mode on '+from+' to '+value);
+		});
+		
+		// "Raw" event.
 		event.on("raw", function (msg) {
 			console.log('RAW: '+msg);
+		});
+		
+		// "Slowmode" event.
+		event.on("slowmode", function (channel, value) {
+			console.log('Changed slow mode on '+from+' to '+value);
+		});
+		
+		// "Submode" event.
+		event.on("submode", function (channel, value) {
+			console.log('Changed subscribers-only mode on '+from+' to '+value);
 		});
 		
 		// "Subscribe" event.

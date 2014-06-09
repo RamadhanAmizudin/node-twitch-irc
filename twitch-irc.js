@@ -175,6 +175,7 @@ function _createUser(username) {
  * Handle RAW messages.
  */
 function _handleMsg(line) {
+	console.log(line);
 	// Commands.
 	switch(line.split(" ")[0]) {
 		case 'PING':
@@ -199,22 +200,27 @@ function _handleMsg(line) {
 					var special = users[msg.split(" ")[1]].special;
 					if (us.indexOf(special,msg.split(" ")[2]) < 0) { special.push(msg.split(" ")[2]); }
 				}
-				if (msg.split(" ")[0] === 'USERCOLOR') {
+				else if (msg.split(" ")[0] === 'USERCOLOR') {
 					_createUser(msg.split(" ")[1]);
 					users[msg.split(" ")[1]].color = msg.split(" ")[2];
 				}
-				if (msg.split(" ")[0] === 'EMOTESET') {
+				else if (msg.split(" ")[0] === 'EMOTESET') {
 					_createUser(msg.split(" ")[1]);
 					users[msg.split(" ")[1]].emote = msg.split(" ")[2];
 				}
-				if (msg.split(" ")[0] === 'CLEARCHAT') {
+				else if (msg.split(" ")[0] === 'CLEARCHAT') {
 					if (msg.split(" ")[1]) {
 						connect.emit('timeout', to, msg.split(" ")[1]);
 					} else {
 						connect.emit('clearchat', to);
 					}
 				}
-				
+				else if (msg === 'This room is now in subscribers-only mode.') { connect.emit('submode', to, true); }
+				else if (msg === 'This room is no longer in subscribers-only mode.') { connect.emit('submode', to, false); }
+				else if (msg.indexOf('This room is now in slow mode. You may send messages every') === 0) { connect.emit('slowmode', to, true); }
+				else if (msg === 'This room is no longer in slow mode.') { connect.emit('slowmode', to, false); }
+				else if (msg.indexOf('This room is now in r9k mode.') === 0) { connect.emit('r9kmode', to, true); }
+				else if (msg === 'This room is no longer in r9k mode.') { connect.emit('r9kmode', to, false); }
 			}
 			else {
 				if (msg.split(" ")[0] === '\u0001ACTION') {
