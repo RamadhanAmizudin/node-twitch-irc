@@ -71,7 +71,7 @@ var client = new irc.connect(config, function(err, event) {
 		
 		// "R9Kmode" event.
 		event.on("r9kmode", function (channel, value) {
-			console.log('Changed R9K mode on '+from+' to '+value);
+			console.log('Changed R9K mode on '+channel+' to '+value);
 		});
 		
 		// "Raw" event.
@@ -81,12 +81,12 @@ var client = new irc.connect(config, function(err, event) {
 		
 		// "Slowmode" event.
 		event.on("slowmode", function (channel, value) {
-			console.log('Changed slow mode on '+from+' to '+value);
+			console.log('Changed slow mode on '+channel+' to '+value);
 		});
 		
 		// "Submode" event.
 		event.on("submode", function (channel, value) {
-			console.log('Changed subscribers-only mode on '+from+' to '+value);
+			console.log('Changed subscribers-only mode on '+channel+' to '+value);
 		});
 		
 		// "Subscribe" event.
