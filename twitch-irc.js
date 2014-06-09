@@ -286,4 +286,11 @@ connect.prototype.say = function(channel, message) {
 	connect.write('PRIVMSG '+channel.toLowerCase()+' :'+message+'\r\n');
 }
 
+connect.prototype.send = function(channel, command) {
+	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
+	if (command.charAt(0) !== '/') { command = '/'+command; }
+	
+	connect.write('PRIVMSG '+channel.toLowerCase()+' :'+command+'\r\n');
+}
+
 exports.connect = connect;
