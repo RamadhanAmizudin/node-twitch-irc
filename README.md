@@ -27,9 +27,12 @@ npm install node-twitch-irc
 - [mode](examples/events.js#L51)
 - [names](examples/events.js#L56)
 - [part](examples/events.js#L67)
-- [raw](examples/events.js#L72)
-- [subscribe](examples/events.js#L77)
-- [timeout](examples/events.js#L82)
+- [r9kmode](examples/events.js#L72)
+- [raw](examples/events.js#L77)
+- [slowmode](examples/events.js#L82)
+- [submode](examples/events.js#L87)
+- [subscribe](examples/events.js#L92)
+- [timeout](examples/events.js#L97)
 
 ### Commands
 
@@ -37,6 +40,7 @@ npm install node-twitch-irc
 - [join](examples/commands.js)
 - [part](examples/commands.js)
 - [say](examples/commands.js)
+- [send](examples/commands.js)
 
 ### Questions or need help?
 
