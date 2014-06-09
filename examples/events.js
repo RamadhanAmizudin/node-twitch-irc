@@ -69,7 +69,7 @@ var client = new irc.connect(config, function(err, event) {
 			console.log('LEFT: '+channel);
 		});
 		
-		// "Raw" event.
+		// "R9Kmode" event.
 		event.on("r9kmode", function (channel, value) {
 			console.log('Changed R9K mode on '+from+' to '+value);
 		});
