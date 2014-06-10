@@ -1,6 +1,6 @@
 {
   "name": "node-twitch-irc",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Node.js module allowing you to connect to Twitch and handle multiple events asynchronously.",
   "main": "twitch-irc.js",
   "scripts": {
