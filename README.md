@@ -8,7 +8,8 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 
 ### Installation
 
-1- Install [Node.js](http://nodejs.org/download/)
+1- You will need [node.js](http://nodejs.org/) and [npm](https://npmjs.org/). Joyent has
+an [excellent blog post on how to get those installed](http://joyent.com/blog/installing-node-and-npm), so we'll omit those details here.
 
 2- Install node-twitch-irc via NPM:
 ```
