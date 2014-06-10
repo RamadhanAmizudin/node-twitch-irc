@@ -16,31 +16,33 @@ npm install node-twitch-irc
 ```
 3- Check out the [examples on GitHub](examples) of how to use node-twitch-irc.
 
+4- Check out the [wiki](https://github.com/Schmoopiie/node-twitch-irc/wiki/Configuration). It's worth it.
+
 ### Events
 
-- [action](examples/events.js#L21)
-- [chat](examples/events.js#L26)
-- [clearchat](examples/events.js#L31)
-- [connected](examples/events.js#L36)
-- [disconnected](examples/events.js#L41)
-- [join](examples/events.js#L46)
-- [mode](examples/events.js#L51)
-- [names](examples/events.js#L56)
-- [part](examples/events.js#L67)
-- [r9kmode](examples/events.js#L72)
-- [raw](examples/events.js#L77)
-- [slowmode](examples/events.js#L82)
-- [submode](examples/events.js#L87)
-- [subscribe](examples/events.js#L92)
-- [timeout](examples/events.js#L97)
+- [action](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-action)
+- [chat](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-chat)
+- [clearchat](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-clearchat)
+- [connected](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-connected)
+- [disconnected](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-disconnected)
+- [join](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-join)
+- [mode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-mode)
+- [names](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-names)
+- [part](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-part)
+- [r9kmode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-r9kmode)
+- [raw](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-raw)
+- [slowmode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-slowmode)
+- [submode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-submode)
+- [subscribe](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-subscribe)
+- [timeout](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-timeout)
 
 ### Commands
 
-- [action](examples/commands.js)
-- [join](examples/commands.js)
-- [part](examples/commands.js)
-- [say](examples/commands.js)
-- [send](examples/commands.js)
+- [action](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-action)
+- [join](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-join)
+- [part](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-part)
+- [say](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-say)
+- [send](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-send)
 
 ### Questions or need help?
 
