@@ -127,7 +127,7 @@ var connect = function(conf, callback) {
 		var lines = buffer.split("\r\n");
 		buffer = lines.pop();
 		lines.forEach(function (line) {
-			var message = _handleMsg(line);
+			var message = _handleMsg(line, self.config.debug);
 			try {
 				// Callback - Connected or not ?
 				if (message.indexOf('You are in a maze of twisty passages') >= 0) {
@@ -176,8 +176,8 @@ function _createUser(username) {
 /**
  * Handle RAW messages.
  */
-function _handleMsg(line) {
-	if (config.debug) {
+function _handleMsg(line, debug) {
+	if (debug) {
 		console.log(line);
 	}
 	// Commands.
