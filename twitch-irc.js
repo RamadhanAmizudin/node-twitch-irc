@@ -31,7 +31,8 @@ var connect = function(conf, callback) {
 		server: 'irc.twitch.tv',
 		port: 6667,
 		nickname: 'justinfan'+Math.floor((Math.random() * 80000) + 1000),
-		oauth: ''
+		oauth: '',
+		debug: false
 	};
 	
 	/**
@@ -45,6 +46,7 @@ var connect = function(conf, callback) {
 		if (conf.port && us.isNumber(conf.port)) { self.config.port = conf.port; }
 		if (conf.nickname && us.isString(conf.nickname)) { self.config.nickname = conf.nickname; }
 		if (conf.oauth && us.isString(conf.oauth)) { self.config.oauth = conf.oauth; }
+		if (conf.debug && us.isBoolean(conf.debug)) { self.config.debug = conf.debug; }
 	}
 	
 	/**
@@ -175,7 +177,9 @@ function _createUser(username) {
  * Handle RAW messages.
  */
 function _handleMsg(line) {
-	console.log(line);
+	if (config.debug) {
+		console.log(line);
+	}
 	// Commands.
 	switch(line.split(" ")[0]) {
 		case 'PING':
