@@ -9,11 +9,6 @@ var users = {};
  */
 var connect = function(conf, callback) {
 	var self = this;
-	var err = {
-		code: 0,
-		message: '',
-		details: ''
-	};
 	
 	/**
 	 * Default configuration.
