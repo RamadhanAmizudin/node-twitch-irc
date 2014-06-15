@@ -192,7 +192,7 @@ function _handleMsg(line, debug) {
 		case 'PRIVMSG':
 			var from = line.split(" ")[0].split("!")[0].replace(':','');
 			var to = line.split(" ")[2];
-			var msg = line.split(":")[2];
+			var msg = line.substr(line.indexOf(":",2) + 1);
 			_createUser(from);
 			
 			if (from === 'twitchnotify' && msg.indexOf('just subscribed!')) {
