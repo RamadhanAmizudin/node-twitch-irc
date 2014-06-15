@@ -49,22 +49,6 @@ var connect = function(conf, callback) {
 	_connect(self.config);
 	
 	/**
-	 * Emitted when the server has been bound after calling server.listen.
-	 */
-	connect.on('listening', function() {
-		//
-	});
-	
-	/**
-	 * Emitted when a new connection is made. socket is an instance of net.Socket.
-	 * 
-	 * @param Socket object The connection object
-	 */
-	connect.on('connection', function(socket) {
-		//
-	});
-	
-	/**
 	 * Emitted when the server closes.
 	 * Note that if connections exist, this event is not emitted until all connections are ended.
 	 */
