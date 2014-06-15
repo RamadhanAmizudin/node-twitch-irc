@@ -169,12 +169,12 @@ function _handleMsg(line, debug) {
 	switch(line.split(" ")[1]) {
 		case 'PRIVMSG':
 			var from = line.split(" ")[0].split("!")[0].replace(':','');
-			var to = line.split(" ")[2];
+			var channel = line.split(" ")[2];
 			var msg = line.substr(line.indexOf(":",2) + 1);
 			_createUser(from);
 			
 			if (from === 'twitchnotify' && msg.indexOf('just subscribed!')) {
-				connect.emit('subscribe', to, msg.split(" ")[0]);
+				connect.emit('subscribe', channel, msg.split(" ")[0]);
 			}
 			else if (from === 'jtv') {
 				if (msg.split(" ")[0] === 'SPECIALUSER') {
@@ -192,23 +192,23 @@ function _handleMsg(line, debug) {
 				}
 				else if (msg.split(" ")[0] === 'CLEARCHAT') {
 					if (msg.split(" ")[1]) {
-						connect.emit('timeout', to, msg.split(" ")[1]);
+						connect.emit('timeout', channel, msg.split(" ")[1]);
 					} else {
-						connect.emit('clearchat', to);
+						connect.emit('clearchat', channel);
 					}
 				}
-				else if (msg === 'This room is now in subscribers-only mode.') { connect.emit('submode', to, true); }
-				else if (msg === 'This room is no longer in subscribers-only mode.') { connect.emit('submode', to, false); }
-				else if (msg.indexOf('This room is now in slow mode. You may send messages every') === 0) { connect.emit('slowmode', to, true); }
-				else if (msg === 'This room is no longer in slow mode.') { connect.emit('slowmode', to, false); }
-				else if (msg.indexOf('This room is now in r9k mode.') === 0) { connect.emit('r9kmode', to, true); }
-				else if (msg === 'This room is no longer in r9k mode.') { connect.emit('r9kmode', to, false); }
+				else if (msg === 'This room is now in subscribers-only mode.') { connect.emit('submode', channel, true); }
+				else if (msg === 'This room is no longer in subscribers-only mode.') { connect.emit('submode', channel, false); }
+				else if (msg.indexOf('This room is now in slow mode. You may send messages every') === 0) { connect.emit('slowmode', channel, true); }
+				else if (msg === 'This room is no longer in slow mode.') { connect.emit('slowmode', channel, false); }
+				else if (msg.indexOf('This room is now in r9k mode.') === 0) { connect.emit('r9kmode', channel, true); }
+				else if (msg === 'This room is no longer in r9k mode.') { connect.emit('r9kmode', channel, false); }
 			}
 			else {
 				if (msg.split(" ")[0] === '\u0001ACTION') {
-					connect.emit('action', users[from], to, msg.replace('\u0001ACTION ', '').replace('\u0001', ''));
+					connect.emit('action', users[from], channel, msg.replace('\u0001ACTION ', '').replace('\u0001', ''));
 				} else {
-					connect.emit('chat', users[from], to, msg);
+					connect.emit('chat', users[from], channel, msg);
 				}
 			}
 			break;
