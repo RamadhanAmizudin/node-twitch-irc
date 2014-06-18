@@ -14,29 +14,15 @@ var connect = function(conf, callback) {
 	 * Default configuration.
 	 */
 	self.config = {
-		autoreconnect: true,
-		channels: [],
-		names: false,
-		server: 'irc.twitch.tv',
-		port: 6667,
-		nickname: 'justinfan'+Math.floor((Math.random() * 80000) + 1000),
-		oauth: '',
-		debug: false
+		autoreconnect: conf.autoreconnect || true,
+		channels: conf.channels || [],
+		names: conf.names || false,
+		server: conf.server || 'irc.twitch.tv',
+		port: conf.port || 6667,
+		nickname: conf.nickname || 'justinfan'+Math.floor((Math.random() * 80000) + 1000),
+		oauth: conf.oauth || '',
+		debug: conf.debug || false
 	};
-	
-	/**
-	 * Custom configuration.
-	 */
-	if (conf && us.isObject(conf)) {
-		if (conf.autoreconnect && us.isBoolean(conf.autoreconnect)) { self.config.autoreconnect = conf.autoreconnect; }
-		if (conf.channels && us.isArray(conf.channels)) { self.config.channels = conf.channels; }
-		if (conf.names && us.isBoolean(conf.names)) { self.config.names = conf.names; }
-		if (conf.server && us.isString(conf.server)) { self.config.server = conf.server; }
-		if (conf.port && us.isNumber(conf.port)) { self.config.port = conf.port; }
-		if (conf.nickname && us.isString(conf.nickname)) { self.config.nickname = conf.nickname; }
-		if (conf.oauth && us.isString(conf.oauth)) { self.config.oauth = conf.oauth; }
-		if (conf.debug && us.isBoolean(conf.debug)) { self.config.debug = conf.debug; }
-	}
 	
 	/**
 	 * Connect and send basic informations to the server.
