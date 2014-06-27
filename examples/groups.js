@@ -1,12 +1,8 @@
 /**
- * This is an example of how to use node-twitch-irc.
- * 
- * In this example, we will connect to a Twitch IRC server and join a group channel.
- * 
  * You will need to create an account for your bot and retrieve the
  * oauth password (http://twitchapps.com/tmi/).
  * 
- * Retrieve the IRC servers and group channels with
+ * Retrieve the IRC Servers and group channels with
  * https://chatdepot.twitch.tv/room_memberships?oauth_token=YOUR_TOKEN
  */
 
