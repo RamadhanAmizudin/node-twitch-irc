@@ -10,7 +10,7 @@ var irc = require('node-twitch-irc');
 var config = {
 	nickname: 'bot_username',
 	channels: ['#list','#of','#channels'],
-	oauth: 'oauth:your_oauth_password'
+	oauth: 'oauth:your_oauth_token'
 };
 
 var client = new irc.connect(config, function(err, event) {

@@ -12,7 +12,7 @@ var irc = require('node-twitch-irc');
 var config = {
 	nickname: 'bot_username',
 	channels: ['#list','#of','#channels'],
-	oauth: 'oauth:your_oauth_password',
+	oauth: 'oauth:your_oauth_token',
 	names: true // Set the 'names' option to true (Default: false) to listen for 'names' event (See below).
 };
 

@@ -17,7 +17,7 @@ var config = {
 	channels: ['#_group_channel'],
 	server: '199.9.248.248',
 	port: 80,
-	oauth: 'oauth:your_oauth_password'
+	oauth: 'oauth:your_oauth_token'
 };
 
 var client = new irc.connect(config, function(err, event) {
