@@ -16,23 +16,23 @@ var config = {
 var client = new irc.connect(config, function(err, event) {
 	if (!err) {
 		// "Chat" event.
-		event.on("chat", function (from, to, message) {
+		event.on("chat", function (user, channel, message) {
 			var msg = message.toLowerCase();
 			var args = msg.split(" ");
 			
 			if (msg === '!hello') {
-				client.say(to, 'Hello, '+from.username+'!');
+				client.say(channel, 'Hello, '+user.username+'!');
 			}
 			
 			else if (msg === '!action') {
-				client.action(to, 'Hello, '+from.username+'!');
+				client.action(channel, 'Hello, '+user.username+'!');
 			}
 			
 			else if (msg.indexOf('!join ') === 0) {
 				if (typeof args[1] !== 'undefined' && args[1].trim() !== '') {
 					client.join(args[1]);
 				} else {
-					client.say(to, 'Insufficient arguments. Type !join #channel');
+					client.say(channel, 'Insufficient arguments. Type !join #channel');
 				}
 			}
 			
@@ -40,7 +40,7 @@ var client = new irc.connect(config, function(err, event) {
 				if (typeof args[1] !== 'undefined' && args[1].trim() !== '') {
 					client.part(args[1]);
 				} else {
-					client.say(to, 'Insufficient arguments. Type !part #channel');
+					client.say(channel, 'Insufficient arguments. Type !part #channel');
 				}
 			}
 		});
