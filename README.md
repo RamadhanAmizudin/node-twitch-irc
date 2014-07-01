@@ -6,6 +6,10 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 
 ![](https://david-dm.org/Schmoopiie/node-twitch-irc.png)
 
+### Latest update notes
+
+Since the 1st of July, justinfan accounts (anonymous) requires a random password. Twitch is working on their Auth system and this might be a bug.
+
 ### Installation
 
 1- You will need [node.js](http://nodejs.org/) and [npm](https://npmjs.org/). Joyent has
