@@ -20,7 +20,7 @@ var connect = function(conf, callback) {
 		server: conf.server || 'irc.twitch.tv',
 		port: conf.port || 6667,
 		nickname: conf.nickname || 'justinfan'+Math.floor((Math.random() * 80000) + 1000),
-		oauth: conf.oauth || '',
+		oauth: conf.oauth || 'TWITCH',
 		debug: conf.debug || false
 	};
 	
@@ -113,7 +113,7 @@ var connect = function(conf, callback) {
  */
 function _connect(config) {
 	connect = nt.createConnection(config.port, config.server);
-	if (config.oauth !== '') { connect.write('PASS '+config.oauth+'\r\n'); }
+	connect.write('PASS '+config.oauth+'\r\n');
 	connect.write('NICK '+config.nickname+'\r\n');
 	connect.write('USER '+config.nickname+' 8 * :'+config.nickname+'\r\n');
 }
