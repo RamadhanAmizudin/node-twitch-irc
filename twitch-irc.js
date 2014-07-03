@@ -21,7 +21,8 @@ var connect = function(conf, callback) {
 		port: conf.port || 6667,
 		nickname: conf.nickname || 'justinfan'+Math.floor((Math.random() * 80000) + 1000),
 		oauth: conf.oauth || 'TWITCH',
-		debug: conf.debug || false
+		debug: conf.debug || false,
+		twitchclient: conf.twitchclient || 3
 	};
 	
 	/**
@@ -55,7 +56,7 @@ var connect = function(conf, callback) {
 	});
 	
 	connect.on("connected", function () {
-		connect.write('TWITCHCLIENT 3\r\n');
+		connect.write('TWITCHCLIENT '+self.config.twitchclient+'\r\n');
 		self.config.channels.forEach(function(channel) {
 			if (channel.charAt(0) !== '#') { channel = '#'+channel; }
 			connect.write('JOIN '+channel.toLowerCase()+'\r\n');
@@ -69,7 +70,7 @@ var connect = function(conf, callback) {
 		}
 	});
 	
-	connect.on("join", function (channel) {
+	connect.on("join", function (channel, username) {
 		if (self.config.names) {
 			_chatters(channel, function(err, result) {
 				if (!err) {
@@ -86,7 +87,7 @@ var connect = function(conf, callback) {
 		var lines = buffer.split("\r\n");
 		buffer = lines.pop();
 		lines.forEach(function (line) {
-			var message = _handleMsg(line, self.config.debug);
+			var message = _handleMsg(line, self.config);
 			try {
 				// Callback - Connected or not ?
 				if (message.indexOf('You are in a maze of twisty passages') >= 0) {
@@ -135,8 +136,8 @@ function _createUser(username) {
 /**
  * Handle RAW messages.
  */
-function _handleMsg(line, debug) {
-	if (debug) {
+function _handleMsg(line, config) {
+	if (config.debug) {
 		console.log(line);
 	}
 	// Commands.
@@ -202,8 +203,9 @@ function _handleMsg(line, debug) {
 			break;
 		case 'JOIN':
 			var channel = line.split(" ")[2];
+			var username = line.split(" ")[0].split("!")[0].replace(':','');
 			
-			connect.emit('join', channel);
+			connect.emit('join', channel, username);
 			break;
 		case 'PART':
 			var channel = line.split(" ")[2];

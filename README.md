@@ -6,9 +6,11 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 
 ![](https://david-dm.org/Schmoopiie/node-twitch-irc.png)
 
-### Latest update notes
+### Changelogs
 
-Since the 1st of July, justinfan accounts (anonymous) requires a random password. Twitch is working on their Auth system and this might be a bug.
+v1.1.0:
+
+- You can change the twitchclient setting from the configuration, but keep in mind that you might not receive all the notices from JTV and TwitchNotify. It is recommended to use the default value (3). The [join](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-join) event has changed and is now retrieving the username.
 
 ### Installation
 
