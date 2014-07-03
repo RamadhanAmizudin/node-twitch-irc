@@ -19,7 +19,7 @@ var config = {
 };
 
 // List of mods in your channel.
-var mods = ['username1','username2','username3','username4']
+var mods = ['username1','username2','username3','username4'];
 
 var client = new irc.connect(config, function(err, event) {
 	if (!err) {
