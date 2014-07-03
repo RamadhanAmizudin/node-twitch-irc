@@ -34,8 +34,8 @@ var client = new irc.connect(config, function(err, event) {
 		});
 		
 		// "Join" event.
-		event.on("join", function (channel) {
-			console.log('JOINED: '+channel);
+		event.on("join", function (channel, username) {
+			console.log(username+' HAS JOINED '+channel);
 		});
 		
 		// "Submode" event.
