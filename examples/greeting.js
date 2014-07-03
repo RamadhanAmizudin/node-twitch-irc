@@ -38,7 +38,7 @@ var client = new irc.connect(config, function(err, event) {
 		event.on("join", function (channel, username) {
 			console.log(username+' JOINED '+channel);
 			if (username !== config.nickname) {
-        client.say(channel, 'Welcome, '+username+'!');
+				client.say(channel, 'Welcome, '+username+'!');
 			}
 		});
 	}
