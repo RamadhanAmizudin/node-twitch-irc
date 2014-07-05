@@ -3,6 +3,8 @@ var nt = require('net'),
 	us = require('underscore');
 
 var users = {};
+var commands = [];
+var channels = [];
 
 /**
  * Main function.
@@ -16,7 +18,6 @@ var connect = function(conf, callback) {
 	self.config = {
 		autoreconnect: conf.autoreconnect || true,
 		channels: conf.channels || [],
-		names: conf.names || false,
 		server: conf.server || 'irc.twitch.tv',
 		port: conf.port || 6667,
 		nickname: conf.nickname || 'justinfan'+Math.floor((Math.random() * 80000) + 1000),
@@ -64,20 +65,27 @@ var connect = function(conf, callback) {
 	});
 	
 	connect.on("disconnected", function (reason) {
-		connected = false;
+		channels = [];
 		if (self.config.autoreconnect) {
 			setTimeout( function() { _connect(self.config); }, 5000);
 		}
 	});
 	
-	connect.on("join", function (channel, username) {
-		if (self.config.names) {
-			_chatters(channel, function(err, result) {
-				if (!err) {
-					var names = result.chatters;
-					connect.emit('names', channel, names);
-				}
-			});
+	connect.on('join', function(channel, username) {
+		if (username === self.config.nickname) {
+			channels.push(channel);
+		}
+	});
+	
+	connect.on('part', function(channel, username) {
+		var array = [2, 5, 9];
+		var index = array.indexOf(5);
+		
+		if (username === self.config.nickname) {
+			var index = channels.indexOf(channel);
+			if (index > -1) {
+				channels.splice(index, 1);
+			}
 		}
 	});
 	
@@ -92,7 +100,6 @@ var connect = function(conf, callback) {
 				// Callback - Connected or not ?
 				if (message.indexOf('You are in a maze of twisty passages') >= 0) {
 					callback(null, connect);
-					connected = true;
 					connect.emit('connected');
 				}
 				if (message.indexOf('Login unsuccessful') >= 0) {
@@ -105,6 +112,9 @@ var connect = function(conf, callback) {
 			}
 		});
 	});
+	
+	// Clear the commands queue every 10 seconds.
+	setInterval(function(){_clearCommands();},10000);
 	
 	process.EventEmitter.call(this);
 }
@@ -185,6 +195,10 @@ function _handleMsg(line, config) {
 				else if (msg === 'This room is no longer in slow mode.') { connect.emit('slowmode', channel, false); }
 				else if (msg.indexOf('This room is now in r9k mode.') === 0) { connect.emit('r9kmode', channel, true); }
 				else if (msg === 'This room is no longer in r9k mode.') { connect.emit('r9kmode', channel, false); }
+				else if (msg.indexOf('The moderators of this room are') === 0) {
+					var mods = msg.substr(msg.indexOf(":",2) + 2);
+					connect.emit('mods', channel, mods);
+				}
 			}
 			else {
 				if (msg.split(" ")[0] === '\u0001ACTION') {
@@ -209,8 +223,16 @@ function _handleMsg(line, config) {
 			break;
 		case 'PART':
 			var channel = line.split(" ")[2];
+			var username = line.split(" ")[0].split("!")[0].replace(':','');
 			
-			connect.emit('part', channel);
+			connect.emit('part', channel, username);
+			break;
+		case '353':
+			var channel = line.split(" ")[4];
+			var names = line.substr(line.indexOf(":",2) + 1);
+			if (config.twitchclient === 1) {
+				connect.emit('names', channel, names);
+			}
 			break;
 	}
 	
@@ -218,17 +240,18 @@ function _handleMsg(line, config) {
 }
 
 /**
- * Returns a list of all users connected on a channel.
- * 
- * e.g: http://tmi.twitch.tv/group/user/lirik/chatters
+ * Clear the commands queue.
  */
-function _chatters(channel, cb) {
-	rq('http://tmi.twitch.tv/group/user/'+channel.replace('#','').toLowerCase()+'/chatters', function (error, response, body) {
-		var codes = [500,501,502,503,504,505];
-		if (!error && response.statusCode === 200 && us.indexOf(codes, response.statusCode) === -1) {
-			cb(null, JSON.parse(body));
-		} else { cb(response.statusCode, null); }
-	});
+function _clearCommands() {
+	var currentTime = new Date().getTime() / 1000;
+	var scope = currentTime - 30;
+	var count = 0;
+	
+	for (var i = commands.length; i >= 0 ; i--) {
+		if (commands[i] < scope) {
+			commands.splice(i, 1);
+		}
+	}
 }
 
 /**
@@ -236,13 +259,24 @@ function _chatters(channel, cb) {
  */
 connect.prototype.action = function(channel, message) {
 	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
-	connect.write('PRIVMSG '+channel.toLowerCase()+' :/me '+message+'\r\n');
+	if (channels.indexOf(channel) >= 0) {
+		connect.write('PRIVMSG '+channel.toLowerCase()+' :/me '+message+'\r\n');
+	} else { console.log('Cannot send action message to '+channel+'. The bot isn\'t on the channel.'); }
 }
 
 connect.prototype.join = function(channel) {
 	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
 	
 	connect.write('JOIN '+channel.toLowerCase()+'\r\n');
+}
+
+connect.prototype.mods = function(channel) {
+	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
+	
+	if (channels.indexOf(channel) >= 0) {
+		connect.write('PRIVMSG '+channel.toLowerCase()+' :/mods\r\n');
+		commands.push(new Date().getTime() / 1000);
+	} else { console.log('Cannot retrieve mods from '+channel+'. The bot isn\'t on the channel.'); }
 }
 
 connect.prototype.part = function(channel) {
@@ -254,14 +288,34 @@ connect.prototype.part = function(channel) {
 connect.prototype.say = function(channel, message) {
 	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
 	
-	connect.write('PRIVMSG '+channel.toLowerCase()+' :'+message+'\r\n');
+	if (channels.indexOf(channel) >= 0) {
+		connect.write('PRIVMSG '+channel.toLowerCase()+' :'+message+'\r\n');
+		commands.push(new Date().getTime() / 1000);
+	} else { console.log('Cannot send message to '+channel+'. The bot isn\'t on the channel.'); }
 }
 
 connect.prototype.send = function(channel, command) {
 	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
 	if (command.charAt(0) !== '/') { command = '/'+command; }
 	
-	connect.write('PRIVMSG '+channel.toLowerCase()+' :'+command+'\r\n');
+	if (channels.indexOf(channel) >= 0) {
+		connect.write('PRIVMSG '+channel.toLowerCase()+' :'+command+'\r\n');
+		commands.push(new Date().getTime() / 1000);
+	} else { console.log('Cannot send command to '+channel+'. The bot isn\'t on the channel.'); }
+}
+
+connect.prototype.commandCount = function() {
+	var currentTime = new Date().getTime() / 1000;
+	var scope = currentTime - 30;
+	var count = 0;
+	
+	for (var i = 0; i < commands.length; i++) {
+		if (commands[i] >= scope) {
+			count++;
+		}
+	}
+	
+	return count;
 }
 
 exports.connect = connect;

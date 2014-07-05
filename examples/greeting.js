@@ -24,11 +24,8 @@ var mods = ['username1','username2','username3','username4'];
 var client = new irc.connect(config, function(err, event) {
 	if (!err) {
 		// "Chat" event.
-		event.on("chat", function (from, to, message) {
-			var msg = message.toLowerCase();
-			var args = msg.split(" ");
-			
-			console.log('['+to+'] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
+		event.on("chat", function (from, channel, message) {
+			console.log('['+channel+'] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
 		});
 		
 		// "Connected" event.
@@ -43,7 +40,7 @@ var client = new irc.connect(config, function(err, event) {
 		
 		// "Join" event.
 		event.on("join", function (channel, username) {
-			console.log(username+' JOINED '+channel);
+			console.log(username+' joined '+channel);
 			
 			// username is in 'mods'
 			if (_.indexOf(mods, username) >= 0) {

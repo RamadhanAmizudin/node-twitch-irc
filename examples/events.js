@@ -41,7 +41,7 @@ var client = new irc.connect(config, function(err, event) {
 		
 		// "Join" event.
 		event.on("join", function (channel, username) {
-			console.log(username+' HAS JOINED '+channel);
+			console.log(username+' joined '+channel);
 		});
 		
 		// "Mode" event.
@@ -49,20 +49,19 @@ var client = new irc.connect(config, function(err, event) {
 			console.log('MODE: '+channel+' '+mode+' '+username);
 		});
 		
-		// "Names" event. ('names' option must be set to true!)
-		/**
-		 * When the bot joins a channel, it will retrieve all the active moderators,
-		 * staffs, admins and viewers as an object.
-		 * 
-		 * The event will NOT be fired if the Twitch API is not responding.
-		 */
+		// "Mods" event.
+		event.on("mods", function (channel, mods) {
+			console.log('MODS OF '+channel+': '+mods);
+		});
+		
+		// "Names" event. (twitchclient 1 is required)
 		event.on("names", function (channel, names) {
-			//console.log(names);
+			console.log('Channel names of '+channel+': '+names);
 		});
 		
 		// "Part" event.
-		event.on("part", function (channel) {
-			console.log('LEFT: '+channel);
+		event.on("part", function (channel, username) {
+			console.log(username+' left '+channel);
 		});
 		
 		// "R9Kmode" event.

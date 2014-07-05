@@ -8,9 +8,20 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 
 ### Changelogs
 
-v1.1.0:
+**v1.1.1**:
 
-- You can change the twitchclient setting from the configuration, but keep in mind that you might not receive all the notices from JTV and TwitchNotify. It is recommended to use the default value (3). The [join](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-join) event has changed and is now retrieving the username.
+- [ADDED] [commandCount()](https://github.com/Schmoopiie/node-twitch-irc/wiki/Function-commandCount()) function to check how many messages were sent within the last 30 seconds.
+- [ADDED] Send a request to the server to get a list of mods of a channel using the [mods command](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-mods).
+- [ADDED] [Mods event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-mods) to retrieve the list of mods of a channel.
+- [CHANGED] [Part event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-part) to include the username param.
+- [CHANGED] [Names event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-names) is now triggered if you set [twitchclient 1](https://github.com/Schmoopiie/node-twitch-irc/wiki/Configuration).
+- [FIXED] Prevent commands from being sent if the bot isn't on the channel.
+- [REMOVED] You are no longer required to set names to true in your configuration.
+- [UPDATED] [Examples](https://github.com/Schmoopiie/node-twitch-irc/tree/master/examples) updated with the last changes.
+
+**v1.1.0**:
+
+- [ADDED] [twitchclient](https://github.com/Schmoopiie/node-twitch-irc/wiki/Configuration) setting.
 
 ### Installation
 
@@ -21,7 +32,7 @@ an [excellent blog post on how to get those installed](http://joyent.com/blog/in
 ```
 npm install node-twitch-irc
 ```
-3- Check out the [examples on GitHub](examples) of how to use node-twitch-irc.
+3- Check out the [examples on GitHub](https://github.com/Schmoopiie/node-twitch-irc/tree/master/examples) of how to use node-twitch-irc.
 
 4- Check out the [wiki](https://github.com/Schmoopiie/node-twitch-irc/wiki/Configuration). It's worth it.
 
