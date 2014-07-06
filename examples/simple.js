@@ -29,8 +29,8 @@ var client = new irc.connect(config, function(err, event) {
 		});
 		
 		// "Chat" event.
-		event.on("chat", function (from, to, message) {
-			console.log('['+to+'] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
+		event.on("chat", function (from, channel, message) {
+			console.log('['+channel+'] <'+from.color+'|'+from.username+'|'+from.special+'> '+message);
 		});
 	}
 	else  {
