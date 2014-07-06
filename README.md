@@ -13,7 +13,7 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 - [ADDED] [commandCount()](https://github.com/Schmoopiie/node-twitch-irc/wiki/Function-commandCount()) function to check how many messages were sent within the last 30 seconds.
 - [ADDED] Send a request to the server to get a list of mods of a channel using the [mods command](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-mods).
 - [ADDED] [Mods event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-mods) to retrieve the list of mods of a channel.
-- [CHANGED] [Part event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-part) to include the username param.
+- [CHANGED] [Part event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-part) is now including the username.
 - [CHANGED] [Names event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-names) is now triggered if you set [twitchclient 1](https://github.com/Schmoopiie/node-twitch-irc/wiki/Configuration).
 - [FIXED] Prevent commands from being sent if the bot isn't on the channel.
 - [REMOVED] You are no longer required to set names to true in your configuration.
@@ -45,6 +45,7 @@ npm install node-twitch-irc
 - [disconnected](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-disconnected)
 - [join](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-join)
 - [mode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-mode)
+- [mods](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-mods)
 - [names](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-names)
 - [part](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-part)
 - [r9kmode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-r9kmode)
@@ -58,9 +59,14 @@ npm install node-twitch-irc
 
 - [action](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-action)
 - [join](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-join)
+- [mods](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-mods)
 - [part](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-part)
 - [say](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-say)
 - [send](https://github.com/Schmoopiie/node-twitch-irc/wiki/Command-send)
+
+### Functions
+
+- [commandCount](https://github.com/Schmoopiie/node-twitch-irc/wiki/Function-commandCount())
 
 ### Questions or need help?
 
