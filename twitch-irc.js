@@ -261,6 +261,7 @@ connect.prototype.action = function(channel, message) {
 	if (channel.charAt(0) !== '#') { channel = '#'+channel; }
 	if (channels.indexOf(channel) >= 0) {
 		connect.write('PRIVMSG '+channel.toLowerCase()+' :/me '+message+'\r\n');
+		commands.push(new Date().getTime() / 1000);
 	} else { console.log('Cannot send action message to '+channel+'. The bot isn\'t on the channel.'); }
 }
 
