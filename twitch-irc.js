@@ -166,7 +166,11 @@ function _handleMsg(line, config) {
 			_createUser(from);
 			
 			if (from === 'twitchnotify' && msg.indexOf('just subscribed!')) {
-				connect.emit('subscribe', channel, msg.split(" ")[0]);
+				if (msg.split(" ")[0].toLowerCase().indexOf('[resub]') >= 0) {
+					connect.emit('resub', channel, msg.split(" ")[0].split("]")[1]);
+				} else {
+					connect.emit('subscribe', channel, msg.split(" ")[0]);
+				}
 			}
 			else if (from === 'jtv') {
 				if (msg.split(" ")[0] === 'SPECIALUSER') {
