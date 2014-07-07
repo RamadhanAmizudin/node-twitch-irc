@@ -12,7 +12,7 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 
 - [ADDED] [Resub event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-resub).
 - [CHANGED] [Names event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-names) is now returning an array of names.
-- [FIXED] Actions (/me <message>) now count as messages/commands for the rate limiter.
+- [FIXED] Actions (/me < message >) now count as messages/commands for the rate limiter.
 
 **v1.1.1**:
 
