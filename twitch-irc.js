@@ -235,7 +235,7 @@ function _handleMsg(line, config) {
 			var channel = line.split(" ")[4];
 			var names = line.substr(line.indexOf(":",2) + 1);
 			if (config.twitchclient === 1) {
-				connect.emit('names', channel, names);
+				connect.emit('names', channel, names.replace(/,/g, '').split(" "));
 			}
 			break;
 	}
