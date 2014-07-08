@@ -201,7 +201,7 @@ function _handleMsg(line, config) {
 				else if (msg === 'This room is no longer in r9k mode.') { connect.emit('r9kmode', channel, false); }
 				else if (msg.indexOf('The moderators of this room are') === 0) {
 					var mods = msg.substr(msg.indexOf(":",2) + 2);
-					connect.emit('mods', channel, mods);
+					connect.emit('mods', channel, mods.replace(/,/g, '').split(" "));
 				}
 			}
 			else {
