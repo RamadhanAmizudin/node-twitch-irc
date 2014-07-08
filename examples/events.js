@@ -85,8 +85,9 @@ var client = new irc.connect(config, function(err, event) {
 		});
 		
 		// "Subscribe" event.
-		event.on("subscribe", function (channel, username) {
-			console.log('NEW SUBSCRIBER: ' + username + ' just subscribed on '+channel);
+		event.on("subscribe", function (channel, username, resub) {
+			if (!resub) { console.log('NEW SUBSCRIBER: ' + username + ' just subscribed on '+channel); }
+			else { console.log('RESUB: ' + username + ' just re-subscribed on '+channel); }
 		});
 		
 		// "Timeout" event.

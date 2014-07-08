@@ -167,9 +167,9 @@ function _handleMsg(line, config) {
 			
 			if (from === 'twitchnotify' && msg.indexOf('just subscribed!')) {
 				if (msg.split(" ")[0].toLowerCase().indexOf('[resub]') >= 0) {
-					connect.emit('resub', channel, msg.split(" ")[0].split("]")[1]);
+					connect.emit('subscribe', channel, msg.split(" ")[0].split("]")[1], true);
 				} else {
-					connect.emit('subscribe', channel, msg.split(" ")[0]);
+					connect.emit('subscribe', channel, msg.split(" ")[0], false);
 				}
 			}
 			else if (from === 'jtv') {
