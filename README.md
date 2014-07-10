@@ -8,7 +8,7 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 
 ### Changelogs
 
-**For the next update..**
+**WORK IN PROGRESS**
 
 - [CHANGED] [Subscribe event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-subscribe) is now returning a param for resubs.
 - [CHANGED] [Names event](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-names) is now returning an array of names.
@@ -57,7 +57,6 @@ npm install node-twitch-irc
 - [part](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-part)
 - [r9kmode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-r9kmode)
 - [raw](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-raw)
-- [resub](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-resub)
 - [slowmode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-slowmode)
 - [submode](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-submode)
 - [subscribe](https://github.com/Schmoopiie/node-twitch-irc/wiki/Event-subscribe)
