@@ -6,11 +6,11 @@ Node.js module allowing you to connect to Twitch and handle multiple events asyn
 
 ![](https://david-dm.org/Schmoopiie/node-twitch-irc.png)
 
+# Important Note
+
+I am re-writing this module for better error-handling and I'm planning to add more features to it. I have no ETA yet as I am not working on this full-time.
+
 ### Changelogs
-
-**WORK IN PROGRESS**
-
-- New [experimental branch](https://github.com/Schmoopiie/node-twitch-irc/tree/experimental).
 
 **v1.1.1**:
 
