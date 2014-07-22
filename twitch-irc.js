@@ -78,9 +78,6 @@ var connect = function(conf, callback) {
 	});
 	
 	connect.on('part', function(channel, username) {
-		var array = [2, 5, 9];
-		var index = array.indexOf(5);
-		
 		if (username === self.config.nickname) {
 			var index = channels.indexOf(channel);
 			if (index > -1) {
