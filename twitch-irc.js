@@ -65,7 +65,7 @@ var connect = function(conf, callback) {
 	});
 	
 	connect.on("disconnected", function (reason) {
-		channels = [];
+		var channels = [];
 		if (self.config.autoreconnect) {
 			setTimeout( function() { _connect(self.config); }, 5000);
 		}
