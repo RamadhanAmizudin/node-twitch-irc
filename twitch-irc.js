@@ -120,7 +120,7 @@ var connect = function(conf, callback) {
  * Connect and send basic informations to the server.
  */
 function _connect(config) {
-	connect = nt.createConnection(config.port, config.server);
+	var connect = nt.createConnection(config.port, config.server);
 	connect.write('PASS '+config.oauth+'\r\n');
 	connect.write('NICK '+config.nickname+'\r\n');
 	connect.write('USER '+config.nickname+' 8 * :'+config.nickname+'\r\n');
