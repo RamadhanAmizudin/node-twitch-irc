@@ -72,13 +72,13 @@ var connect = function(conf, callback) {
 	});
 	
 	connect.on('join', function(channel, username) {
-		if (username === self.config.nickname) {
+		if (username.toLowerCase() === self.config.nickname.toLowerCase()) {
 			channels.push(channel);
 		}
 	});
 	
 	connect.on('part', function(channel, username) {
-		if (username === self.config.nickname) {
+		if (username.toLowerCase() === self.config.nickname.toLowerCase()) {
 			var index = channels.indexOf(channel);
 			if (index > -1) {
 				channels.splice(index, 1);
